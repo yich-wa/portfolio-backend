@@ -45,15 +45,17 @@ app.post('/createVisit', async (req, res) => {
     // const locationData = await getLocationFromIp('112.10.178.243')
     const location = await getLocationFromIp(req.ip)
     if (location) {
-        const visiter = await Visiter.create({
-          location,
-          ip: req.ip,
-          date: new Date(),
-          device: req.body.device
-        })
-        return res.status(200).send(visiter)
+      const visiter = await Visiter.create({
+        location,
+        ip: req.ip,
+        date: new Date(),
+        device: req.body.device,
+      })
+      return res.status(200).send(visiter)
     }
-    return res.status(500).send({ message: `Can not get location from ip: ${req.ip}`})
+    return res
+      .status(500)
+      .send({ message: `Can not get location from ip: ${req.ip}` })
   } catch (err) {
     console.log(err.message)
     res.status(500).send({ message: err.message })
@@ -71,3 +73,6 @@ mongoose
   .catch((err) => {
     console.log(err)
   })
+
+
+export default app

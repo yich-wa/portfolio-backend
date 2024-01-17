@@ -34,13 +34,13 @@ app.get('/getVisitList', async (req, res) => {
 })
 
 app.post('/createVisit', async (req, res) => {
+    console.log('req', req, req.body.ip)
   try {
-    // const locationData = await getLocationFromIp('112.10.178.243')
-    const location = await getLocationFromIp(req.ip)
+    const location = await getLocationFromIp(req.body.ip)
     if (location) {
       const visiter = await Visiter.create({
         location,
-        ip: req.ip,
+        ip: req.body.ip,
         date: new Date(),
         device: req.body.device,
       })

@@ -3,19 +3,12 @@ import { PORT, mongoDbUrl } from './config.js'
 import mongoose from 'mongoose'
 import { Visiter } from './models/visitData.js'
 import { getLocationFromIp } from './util.js'
+import cors from 'cors'
 
 const app = express()
 app.use(express.json())
 
-const allowCrossDomain = function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
-  // 该字段为必须，表明服务器支持的所有跨域请求的方法
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-  res.header('Access-Control-Allow-Headers', 'Content-Type')
-  next()
-}
-
-app.use(allowCrossDomain)
+app.use(cors())
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => {

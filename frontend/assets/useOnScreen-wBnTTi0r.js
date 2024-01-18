@@ -1,0 +1,1 @@
+import{r as e}from"./index-9jFloTKT.js";const o=n=>{const[t,s]=e.useState(!1),r=e.useRef(null);return e.useEffect(()=>{r.current=new IntersectionObserver(([c])=>s(c.isIntersecting))},[]),e.useEffect(()=>(r.current.observe(n.current),()=>{r.current.disconnect()}),[n]),t};export{o as u};
